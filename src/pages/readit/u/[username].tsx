@@ -3,8 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import PostCard from "../../components/PostCard";
-import { Post, Comment } from "../../types";
+import PostCard from "../../../components/PostCard";
+import { Post, Comment } from "../../../types";
 
 export default function user() {
   const router = useRouter();

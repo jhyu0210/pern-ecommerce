@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { useAuthDispatch, useAuthState } from "../context/auth";
-import RedditLogo from "../images/reddit.svg";
+// import RedditLogo from "../images/reddit.svg";
 import { Sub } from "../types";
 import Image from "next/image";
 
@@ -57,17 +57,19 @@ const Navbar: React.FC = () => {
   return (
     <div className="fixed inset-x-0 top-0 z-10 flex items-center justify-between h-12 px-5 bg-white ">
       <div className="flex items-center">
-        <Link href="/">
+        <Link href="/products">
           <a>
-            <RedditLogo className="w-8 h-8 mr-2" />
+            <img src="images/pnlogo.png" alt="pn-logo" className="h-8 mr-2" />
+
+            {/* <RedditLogo className="w-8 h-8 mr-2" /> */}
           </a>
         </Link>
-        <span className="hidden text-2xl font-semibold lg:block">
+        {/* <span className="hidden text-2xl font-semibold lg:block">
           <Link href="/">readit</Link>
-        </span>
+        </span> */}
       </div>
       {/* Serach Input */}
-      <div className="max-w-full px-4 w-160">
+      <div className="max-w-full px-4 w-80">
         <div className="relative flex items-center bg-gray-100 border rounded hover:border-blue-500 hover:bg-white">
           <i className="pl-4 pr-3 text-gray-500 fas fa-search "></i>
           <input
@@ -108,20 +110,30 @@ const Navbar: React.FC = () => {
           (authenticated ? (
             <button
               onClick={logout}
-              className="hidden w-20 py-1 leading-5 sm:block group-hover:mr-4 lg:w-32 hollow blue button"
+              className="hidden w-20 py-1 leading-5 sm:block group-hover:mr-4 lg:w-24 hollow blue button"
             >
               log out
             </button>
           ) : (
             <Fragment>
               <Link href="/login">
-                <a className="hidden w-20 py-1 mr-4 leading-5 sm:block lg:w-32 hollow blue button">
-                  log in
+                <a className="hidden w-20 py-1 mr-4 leading-5 sm:block lg:w-24 hollow blue button">
+                  로그인
                 </a>
               </Link>
               <Link href="/register">
-                <a className="hidden w-20 py-1 leading-5 sm:block lg:w-32 blue button">
-                  sign up
+                <a className="hidden w-20 py-1 mr-4 leading-5 sm:block lg:w-24 hollow blue button">
+                  회원등록
+                </a>
+              </Link>
+              <Link href="/register">
+                <a className="hidden w-20 py-1 mr-4 leading-5 sm:block lg:w-24 hollow blue button">
+                  장바구니
+                </a>
+              </Link>
+              <Link href="/register">
+                <a className="hidden w-20 py-1 leading-5 sm:block lg:w-24 hollow blue button">
+                  마이페이지
                 </a>
               </Link>
             </Fragment>

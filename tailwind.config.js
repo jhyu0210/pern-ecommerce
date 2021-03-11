@@ -2,7 +2,6 @@ module.exports = {
   purge: ['./src/**/*.tsx'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    
     extend: {
       colors: {
         blue: {
@@ -16,6 +15,13 @@ module.exports = {
           800: '#003054',
           900: '#00182a',
         },
+        green:{
+          100: '#B4B400'
+        },
+        purple:{
+          850: '#CC85A8'
+        }
+
       },
       spacing:{
         

@@ -1,31 +1,31 @@
-import Axios from 'axios'
-import { GetServerSideProps } from 'next'
-import Head from 'next/head'
-import { FormEvent, useState } from 'react'
-import classNames from 'classnames'
-import { useRouter } from 'next/router'
+import Axios from "axios";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+import { FormEvent, useState } from "react";
+import classNames from "classnames";
+import { useRouter } from "next/router";
 
 export default function create() {
-  const [name, setName] = useState('')
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
-  const [errors, setErrors] = useState<Partial<any>>({})
+  const [errors, setErrors] = useState<Partial<any>>({});
 
-  const router = useRouter()
+  const router = useRouter();
 
   const submitForm = async (event: FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const res = await Axios.post('/subs', { name, title, description })
+      const res = await Axios.post("/subs", { name, title, description });
 
-      router.push(`/r/${res.data.name}`)
+      router.push(`/r/${res.data.name}`);
     } catch (err) {
-      console.log(err)
-      setErrors(err.response.data)
+      console.log(err);
+      setErrors(err.response.data);
     }
-  }
+  };
 
   return (
     <div className="flex bg-white">
@@ -49,8 +49,8 @@ export default function create() {
               <input
                 type="text"
                 className={classNames(
-                  'w-full p-3 border border-gray-200 rounded hover:border-gray-500',
-                  { 'border-red-600': errors.name }
+                  "w-full p-3 border border-gray-200 rounded hover:border-gray-500",
+                  { "border-red-600": errors.name }
                 )}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -66,8 +66,8 @@ export default function create() {
               <input
                 type="text"
                 className={classNames(
-                  'w-full p-3 border border-gray-200 rounded hover:border-gray-500',
-                  { 'border-red-600': errors.name }
+                  "w-full p-3 border border-gray-200 rounded hover:border-gray-500",
+                  { "border-red-600": errors.name }
                 )}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -81,8 +81,8 @@ export default function create() {
               </p>
               <textarea
                 className={classNames(
-                  'w-full p-3 border border-gray-200 rounded hover:border-gray-500',
-                  { 'border-red-600': errors.description }
+                  "w-full p-3 border border-gray-200 rounded hover:border-gray-500",
+                  { "border-red-600": errors.description }
                 )}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -100,18 +100,18 @@ export default function create() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   try {
-    const cookie = req.headers.cookie
-    if (!cookie) throw new Error('Missing auth token cookie')
+    const cookie = req.headers.cookie;
+    if (!cookie) throw new Error("Missing auth token cookie");
 
-    await Axios.get('/auth/me', { headers: { cookie } })
+    await Axios.get("/auth/me", { headers: { cookie } });
 
-    return { props: {} }
+    return { props: {} };
   } catch (err) {
-    res.writeHead(307, { Location: '/login' }).end()
+    res.writeHead(307, { Location: "/login" }).end();
   }
-}
+};
